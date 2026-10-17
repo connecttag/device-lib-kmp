@@ -19,6 +19,7 @@ val pVersion = project.findProperty("version")?.toString()?.takeIf { it.isNotBla
 version = pVersion
 
 kotlin {
+    compilerOptions { optIn.add("kotlin.js.ExperimentalWasmJsInterop") }
     android {
         namespace = "org.connecttag.lib.device"
         compileSdk = 37
@@ -43,6 +44,9 @@ kotlin {
             isStatic = true
         }
     }
+
+    @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
+    wasmJs { browser() }
 
     sourceSets {
         commonMain.dependencies {
